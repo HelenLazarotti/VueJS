@@ -1,0 +1,24 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <p> {{ titulo }}</p>
+
+    <!--1º v pega o titlo e coloca no  meu input, mas se eu aoagar o input e digitar algo meu titulo nao muda, pra isso posso add o 2º titulo-->
+    
+    <!--Comento o input baixo p outro funcionar-->
+    <input type="text" v-bind:value="titulo" v-on:input="titulo = $event.target.value">
+
+    <!--MAS assim o código fica muito poluido, pra isso remos um substidudo para os 2 V's que é o model:-->
+    <input type="text" v-model="titulo">
+
+</div>
+
+<script>
+
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Olá VueJS, sou Helen!'
+        }
+    })
+</script>
