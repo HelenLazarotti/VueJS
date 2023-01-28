@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<div id="app">
+    <p>{{ titulo }}</p>
+
+    <!--Chamo a função pelo seu nome-->
+    <p>{{ saudacao() }}</p>
+
+    <!--v-bind, serve p fazer ligação do que está na vue instance, e um atributo da minha tag dentro do templates
+    SEMPRE POR v-bind: PARA LINKS-->
+    <a v-bind:href="link">Link maneiro</a>
+
+</div>
+
+<script>
+
+    new Vue({
+
+        //NUNCA ESQUECER de por o tipo de segmento (classe, id...)
+        el: '#app',
+        data: {
+            titulo: 'Persistência, resiliência e paciência',
+            link: 'https://ucsvirtual.ucs.br/'
+        },
+        methods: {
+            //criando uma função
+            saudacao: function () {
+                console.log(this)
+
+                return this.titulo
+
+                //se eu fizer, isso ele consegue pegar meu titulo lá de cima....
+            }
+        }
+    })
+
+</script>

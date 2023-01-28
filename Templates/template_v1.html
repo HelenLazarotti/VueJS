@@ -1,0 +1,28 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<div id="app">
+    <p>{{ titulo }}</p>
+
+    <!--Chamo a função pelo seu nome-->
+    <p>{{ saudacao() }}</p>
+
+</div>
+
+<script>
+    
+    new Vue({
+
+        //NUNCA ESQUECER de por o tipo de segmento (classe, id...)
+        el: '#app',
+        data: {
+            titulo: 'Persistência, resiliência e paciência'
+        },
+        methods: {
+            //criando uma função
+            saudacao: function () {
+                return 'Testando função'
+            }
+        }
+    })
+
+</script>
