@@ -23,10 +23,32 @@
             contador2: 0
             //legal pra fazer placar de jogo
         },
-        //método do VUE p mim não precsar colocar lá em cima como função:
+        //método do VUE p mim não precisar colocar lá em cima como função:
+
+        //prorpiedades computadas são sincronas, ou seja, chamei ela e sou obrigada a retornar o valor...
         computed: {
             results() {
                 return this.contador >= 5 ? 'Maior ou igual a 5' : 'Menor que 5'
+            }
+        },
+
+        //serve p OLHA, qual nº vem antes e qual vem dps que eu clicar no btn
+
+        //watch serve pra monitorar o comportamento de determinada propriedade
+        watch: {
+            contador(novo, antigo){
+
+                //zerar nºs dps de 2 seg:
+                setTimeout(() => {
+                    this.contador = 0
+                }, 2000)
+                
+            },
+            //zerar 2º contador.
+            contador2(novo, antigo) {
+                setTimeout(() => {
+                    this.contador2 = 0
+                }, 2000)
             }
         },
         
