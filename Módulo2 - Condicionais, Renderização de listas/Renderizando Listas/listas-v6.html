@@ -1,0 +1,34 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+   
+        <!--Sempre que há renderização de listas o Vue precisa atualizar essa lista e criar um proxy por baixo dos panos,pra poder renderizar essa lista.
+        
+        Quando temos mudanças na lista, principlamente mudanças de ordens, o Vue precisa de uma chave/key p dizer exatamente onde está esse elemento/identidade dele, então nada melhor do que o Id do produto, pra ser essa dica...-->
+
+        <ul>
+            <li v-for="cor in cores" :key="cor"> {{ cor }}</li>
+        </ul>
+
+        <button @click="cores.push('red')">Add</button>
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            cores: ['red', 'pink', 'purple', 'yellow'],
+
+            pessoas: [
+                {nome: 'Dora',
+                idade: 11,
+                peso: 3},
+                {nome: 'Jesse',
+                idade: 6,
+                peso: 20}
+            ]
+        }
+    })
+</script>
