@@ -1,0 +1,68 @@
+<meta charset="URT-8">
+
+<!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+
+<div id="app">
+    {{nome}} {{sobrenome}} {{ 2023 - 2001}}
+</div>
+
+<script>
+    //recebo obj (params), que logo será instânciada
+    function MeuVue(params) {
+
+        //muitas variáveis do Vue comçam com $, recebo el de params, pegando elemento DOM:
+        this.$el = document.querySelector(params.el)
+
+        this.$data = params.data
+        //quero criar propriedades pra ficar dentro das minhas intâncias, pra criar os proxys, pros dados serem alterados só ali dentro
+
+        //façp um for, p pegar só os atributos dali de dentro (cada 1):
+        for(let atr in this.$data){
+
+            //crio propriedade, passando o objeto-this, o nome do atributo q quero criar e 3º passo um objeto p personalizar:
+            Object.defineProperty(this, atr, {
+
+                //serve de proxy, ou seja, a partir dessa propriedade, ele vai pegar e retornar outra propriedade
+                get: () => {
+
+                    return this.$data[atr]
+                },
+
+                //vai receber valor e alterar dentro do this.$data, com valor que foi passado:
+                set: value => {
+                    //consigo inteceptar o momento antes que vai intercepatar o cód
+
+                    this.$data = value
+
+                    //e o momento dps, posso lançar refrash. etc, pro meu dado ser atualizado
+                }
+
+                //os get e set vão ser chamados automáticamente quando eu quiser ler/alterar  o valor da variável
+            })
+        }
+        //faço interpolação
+        //tenho regex, ali no meio posso botar +, *, / -... Se eu quiser usar um, e não tiver botato aqui dentro não funciona...
+    const regex = /\{\{([\s\w+-]*)\}\}/g
+
+        //peço pra reescrever meu elemento que ta dentro do meu #app, chamando o regex. o $1 é aqui ali no meio das chaves do regex:
+        this.$el.innerHTML = this.$el.innerHTML.replace(regex, (match, $1) => {
+
+            //trim pra tirar os espaços em branco dos {{ nome }}, etc
+            const value = this[$1.trim()]
+
+            //tendo pegar dentro da minha instância, algum atributo que tenha o nome que foi passado dentro da minha expressão regex
+
+            //se o valor tiver setado, me retorna ele, se não, peço pra avaliar a sentença que foi capturada a partir desse regex, fazendo o meu 1+1 ser avaliado e me retornar 2
+            return value ? value : eval($1)
+        })
+
+    }
+
+    const vm = new MeuVue({
+        el: '#app',
+        data: {
+            nome: 'Helen',
+            sobrenome: 'Lazarotti'
+        }
+    })
+</script>
