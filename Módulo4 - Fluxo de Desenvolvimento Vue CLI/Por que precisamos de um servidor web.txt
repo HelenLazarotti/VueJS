@@ -1,0 +1,9 @@
+O VueJS por natureza executa no {Cliente}
+
+MAS a aplicação será servida por um {Servidor} ->
+Um protocolo /http_// não tem os mesmas coisas que o /file://
+
+Então o indicado é ter um servidor {http://}, pra testar as aplicações, assíncronas (AJAX).
+
+O Vue, já tem um servidor Client nele, baseado em NodeJS, que depois com um único comando no terminal, ele vai iniciar nosso /servidor/aplicação.
+

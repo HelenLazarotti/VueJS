@@ -1,0 +1,17 @@
+O Vue Client, add passos a serem seguidos, para aplicação funcionar.
+
+1- {código};
+
+2- Recursos Adicionais {
+    - ambientes configurados/Dev
+    - builds pra produção, produção
+    - compilação do templete pra JS, gerando um único arq. JS que terá tanto nossa lógica, métodos, dados criados, quanto os templetes copilados pra js, como:
+        - qnd tiver em produção todo o html será gerado automaticamente a partir de chamadas JS feitas a parir de uma copilação
+    - Acesso a pré-processadores, como:
+        - SASS
+        - Plugins
+}
+
+3- Servidor de Produção {
+    - usuário
+}
