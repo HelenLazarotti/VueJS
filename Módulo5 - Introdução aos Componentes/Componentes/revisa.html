@@ -1,0 +1,46 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!--
+    Se eu quisesse duplicar essa div, pra ter 2 contadores, meu Vue leria apenas o primeiro, o 2º nem bola.
+
+    Então bora componentizar isso
+-->
+
+<div id="app">
+
+    <!--CHAMO aqui meu componente que nem no react:-->
+    <contador></contador>
+
+</div>
+
+
+
+<script>
+
+    //Registro Global
+    Vue.component('contador-item',  {
+        //preciso por a div, se ç ç funciona, pq o Vue determina que deve apenas retornar UM 1, elemento, e sem a div estávamos tentando enviar 3.
+        props: ['contador'],
+        templete: `
+        <div>
+            <span>{{contador.contador}}</span>
+
+            <button @click="contador++"> +</button>
+
+            <button @click="contador--"> -</button>
+        </div>
+        `,
+    })
+
+     new Vue({
+        el: '#app',
+        //a função data precisa retornar um objeto que é um estado desse componente:
+        data () {
+            return {
+                contador: 0
+            }
+        }
+        
+    })
+</script>
