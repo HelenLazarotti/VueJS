@@ -1,0 +1,27 @@
+Instância VUE: {
+    titulo: 'Helen'
+    cor: 'Rosa',
+    idade: 21
+}
+----------------VUE-------------------
+-------------Virtual DOM---------------
+
+DOM: {
+    <h1>Helen</h1>
+    <span>Rosa</span>
+    <input type='text' value=''>
+}
+
+No meio deles está o VUEJS, que vi MONITORAR e ATUALIZAR caso seja necessário.
+
+Mas o VUE faz isso direto? 'NÃO'
+
+Ele possui ali no meio o Virtual DOM, que monitora cada passo, é código JS sendo monitora e transferido para Vue, sm termos que nos preocupar...
+
+Então -> 
+Instância VUE - se tiver novo estado da intância -> o Virtual: verifica as diferencas. Significando que mudanças precisam ser aplicadas no DOM do browser.
+
+Ai quando sabe-se o que se quer, ou seja a DOM Virtual verifica se causou mudança na DOM física, ai sim ele atualiza.
+
+Logo se eu tenho uma lista com 1000 elementos, o DOM Virtual verifica qual o único elemento mudado.
+

@@ -1,0 +1,31 @@
+Quando chamamos o newVue(), ele inicializa os /eventos/ciclo de vida.
+
+Ai ele chama por baixo dos panos um método: /beforeCreate
+-> chamado antes de criar a própria instância do Vue.
+
+ex: posso usar p obter dados do back-end antes de criar a instância.
+
+LOGO /create -> Cria a instância.
+
+Antes de mandarmos o templete pro browser, a instância do Vue é criada.
+
+Passando por uma gama de verificações, como: {tem 'el:', tem data:, methods...}
+    - se tem templete, ele copila;
+    - caso não tenha, vai pegar o HTML q está fora da instância e usá-lo como templete.
+
+E antes e pegar esse templete e jogar na DOM, ele chama o /beforeMount
+-> ou seja, responsável por montar tudo e colocar no DOM bonitinho.
+
+E chama o método /mounted
+-> ou seja, o processo de inicialização da minha instância e do templete foi concluído.
+    - instância criada V;
+    - templete pronto V;
+
+Agora, entra no ciclo de atualização. Sempre que um processo é atualizado e passa pelo {dom virtual}, e detectou que é obrigado a colocar coisas no DOM, ele chama os métodos:
+/beforeUpdate
+/updated
+
+E quando chamamos a função{$destroy}, ele chama o método /beforeDestroy
+    - processo de destruir, pega todo meu HTML e limpa.
+Depois chamando o método /destroyed, ou seja instância destruida com sucesso.
+

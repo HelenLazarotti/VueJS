@@ -1,0 +1,31 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <!--Consigo fazer uma condicional composta aqui, if/else-->
+<!---->
+    <!--v-if -> SE constar logado, mostro esse <p>-->
+    <p v-if="logado">Usuário Logado: {{ name }}</p>
+
+    <!-- SE NÃO, mostro esse <p>-->
+    <p v-else>Nenhum usuário logado!</p>
+
+    <!--
+        P isso o btn eu nego o logado, ou seja, se o btn tiver true vira false e vice-versa
+    -->
+    <button @click="logado = !logado">
+
+        <!--usuário ta logado? se sim, mostra btn sair se não mostra o entrar-->
+        {{ logado ? 'Sair' : 'Entrar'}}
+    </button>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            name: 'Helenzinha',
+            logado: false //inicializo com false.
+        }
+    })
+</script>

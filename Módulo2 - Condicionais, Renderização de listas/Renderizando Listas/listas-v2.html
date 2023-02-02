@@ -1,0 +1,28 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <ul>
+
+        <!--Se eu quiser acessar o índice:-->
+        <li v-for="(cor, i) in cores"> {{ cor }} - {{ i }}</li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            cores: ['red', 'pink', 'purple', 'yellow'],
+
+            pessoas: [
+                {nome: 'Dora',
+                idade: 11,
+                peso: 3},
+                {nome: 'Jesse',
+                idade: 6,
+                peso: 20}
+            ]
+        }
+    })
+</script>

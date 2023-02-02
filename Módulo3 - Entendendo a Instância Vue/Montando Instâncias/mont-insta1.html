@@ -1,0 +1,42 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+
+    
+</div>
+
+<script>
+    const vm = new Vue({
+        //el: '#app',
+        template: `
+        <div>
+            <h1 ref="aulaRef">{{ aula }}</h1>
+
+            <h2>{{ modulo }}</h2>
+
+            <button @click="alterarAula">Alterar Aula</button>
+
+            <button @click="alterarModulo">Alterar Módulo</button>
+        </div>
+        `,
+        data: {
+            aula: 'JavaScript - Básico',
+            modulo: 'Módulo: Variáveis & Constantes'
+        },
+        methods: {
+            alterarAula(){
+                this.aula += '2'
+            },
+            alterarModulo(){
+                this.modulo += '4'
+            }
+        }
+    })
+    // se por um acaso eu não quiser lá no el:'#app', posso por aqui, já que minha instância Vue, possui algo que posso chamar:
+    //vm.$mount('#app')
+
+    //assim como criar o templete, não é muito indicado, mas é muito usado.
+    vm.$mount()
+    document.querySelector('#app').appendChild(vm.$el)
+</script>

@@ -1,0 +1,32 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+    <ul>
+
+        <!--Criei uma lista normal, iniciando o for dei um nome qualquer, nesse caso 'cor', que indica cada elemento dentro do meu array
+        
+        Ou seja, PARA cada elemento cor, dentro do array cores, lista aqui pra mim.-->
+        <li v-for="cor in cores"> {{ cor }}</li>
+    </ul>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            //criei array de cores
+            cores: ['red', 'pink', 'purple', 'yellow'],
+
+            //criei objeto com 2 pessoas.
+            pessoas: [
+                {nome: 'Dora',
+                idade: 11,
+                peso: 3},
+                {nome: 'Jesse',
+                idade: 6,
+                peso: 20}
+            ]
+        }
+    })
+</script>

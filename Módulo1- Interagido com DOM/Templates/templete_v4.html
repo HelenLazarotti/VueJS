@@ -1,0 +1,36 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+<div id="app">
+
+    <!--O v-html serve pra manipular html puro, serve pra mostrar link se eu quiser, por ex, tenho algum dado no banco de dados, que quero trazer pra ca, então a partir de formatações impostas, posso chamar usando esse atributo-->
+    <p v-once>{{ titulo }}</p>
+
+    <p>{{ saudacao() }}</p>
+
+    <a v-bind:href="link">Link maneiro</a>
+
+    <p v-html="linkParag"></p>
+
+</div>
+
+<script>
+
+    new Vue({
+
+        el: '#app',
+        data: {
+            titulo: 'Persistência, resiliência e paciência',
+            link: 'https://ucsvirtual.ucs.br/',
+            linkParag: '<a href="https://ucsvirtual.ucs.br/">UCS - virtual</a>'
+        },
+        methods: {
+
+            saudacao: function () {
+
+                this.titulo = 'Você é capaz de tudo!'
+
+                return this.titulo
+            }
+        }
+    })
+</script>

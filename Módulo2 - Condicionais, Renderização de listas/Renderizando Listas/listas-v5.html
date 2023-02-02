@@ -1,0 +1,28 @@
+<meta charset="UTF-8">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<div id="app">
+   
+        <!--Posso fazer um interação de 1 á 10, ele ñ vai começar com 0 mas sim com 1-->
+
+        <div v-for="n in 10"> {{n}} </div>
+        
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            cores: ['red', 'pink', 'purple', 'yellow'],
+
+            pessoas: [
+                {nome: 'Dora',
+                idade: 11,
+                peso: 3},
+                {nome: 'Jesse',
+                idade: 6,
+                peso: 20}
+            ]
+        }
+    })
+</script>
