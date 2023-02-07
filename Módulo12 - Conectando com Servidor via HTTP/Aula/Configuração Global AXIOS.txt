@@ -1,0 +1,195 @@
+Para instalar o Axios eu uso o comando no terminal, de dentro do projeto:
+    - npm install --save axios
+
+Depois dou um {npm run serve} e vou no 'package.josn' conferir se o axios está lá.
+
+vou registrar ele de forma global, então vou na pasta 'src' -> 'plugins' -> crio o arquivo 'axios.js'
+
+Depois de escrever o código nesse arq vou em 'main.js' pra importá-lo:
+    {import './plugins/axios'}
+
+Facilitando, pq ai no meu 'App.vue' possoa cessá-lo sem ter que improtar nada, para teste faço o cód:  
+    {
+        created(){
+            this.$http.post('usuarios.json', {
+                nome: 'Helen',
+                email: 'helen@email.com'
+            })
+        }
+    }
+
+Ai se eu for no database a atualizar a pág em 'Dados' -> vai estar lá criado.
+
+Ou tbm posso, no 'axios.js':
+{Vue.use({
+    install(Vue) {
+        Vue.prototype.$http = axios.create({
+            baseURL: 'https://cursovue-32ff2-default-rtdb.firebaseio.com/'
+        })
+    }
+})}
+Mas por agr vou ficar com o tipo normal.
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+                                CRIANDO FORM 
+
+Usei bootstrap Vue pra criar o form, por ex:
+{
+    <b-card>
+			<!--Campo para NOME-->
+			<b-form-group label="Nome:">
+
+				<b-form-input type="text" size="lg" v-model="usuario.nome" placeholder="Digite seu nome"></b-form-input>
+
+			</b-form-group>
+     </b-card>
+}
+Criei um desse p cada campo necessário, depois add um botão:
+    - <b-button @click="salvar" variant="success" size="lg">Salvar</b-button>
+
+No script, coloquei, por agora:
+{data(){
+    return {
+        usuario: {
+            nome: '',
+            email: ''
+        }
+    }
+},
+
+{MÉTODO POST }
+methods: {
+    //criar alguns métodos p submeter esse form:
+    salvar(){
+        //chamar método post(onde quero publicar esses dados, quais são os dados). DEPOIS peço p limpar os campos:
+
+        this.$http.post('usuarios.json', this.usuario)
+        .then( () => {
+            this.usuario.nome = '',
+            this.usuario.email = ''
+        })
+    }
+}}
+    - data pq é as infos que quero, tenho, preciso pro meu banco
+    - methods fizx requisição POST, 
+    - Agora eu for no site e preencher, 'Salvar'
+    - Ir no banco 'RealTime Database', o item foi inserido.
+
+
+{MÉTODO GET}
+
+No <templete> eu criei um botão p mostrar esses usuários, nele usei o 'v-for' pra facilitar nossa vida:
+{<b-button variant="primary" size="lg" class="ml-4" @click="mostraUser">Mostrar Usuários</b-button>}
+
+Criei a chamada: 
+{mostraUser(){
+    this.$http.get('usuarios.json').then(res => {
+        //pego a res e atribuo os valores dela ao meu array
+        this.usuarios = res.data
+    })
+}}
+
+Pedi pra listar esses usuários no meu templete: 
+{<b-list-group>
+    <b-list-group-item v-for="(usuario, id) in usuarios" :key="id">
+
+        <strong>Nome: </strong>{{ usuario.nome }}
+        <br>
+        <strong>E-mail: </strong>{{ usuario.email }}
+        <br>
+        <strong>ID: </strong>{{ id }}
+
+    </b-list-group-item>
+</b-list-group>}
+
+    - OBS: o array é um OBJETO.
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+                        Acessando AXIOS LOCALMENTE
+                
+Se eu quisesse, poderia, no App.js:
+ - importar o axios:
+    {import axios from 'axios'}
+
+- chamar:
+    {
+    mostraUser(){
+       axios.get('https://cursovue-32ff2-default-rtdb.firebaseio.com/').then(res => {
+            this.usuarios = res.data
+            })
+        }
+    }
+
+Mas não é nosso caso, vamos continuar usando globalmente.
+
+Se eu quisesse saber o método e trocar ele por outro eu poderia, no 'axios.js':
+
+{
+    Vue.prototype.$http.interceptors.requst.use(config => {
+        console.log(config.method)
+
+        if(config.method == 'post') {
+            config.method = 'put'
+        }
+        return config
+    }, error => Promise.reject(error))
+}
+
+Ou seja, todos meus métodos post virariam PUT, que serve pra atualizar, mas esse código ai, causa confusão mental, mas sõ pra ver que dá pra fazer all normal.
+
+O erro ali é, pra caso de ruim, posso vizualizar ele sem quebrar a aplciação.
+
+Pode ser usado pra analisar e evitar uma requisição caso o usuário nao esteja logado.
+
+Do banco nós recebemos um objeto, onde a chave é aqueles num estranhos, e e valor tem o nome e email, mas se eu quiser receber um array, e dentro do obj, cada um q pertence ao array tivesse o (id, email e nome), como se recebe normalmente de uma API, então abaixo do outro acima eu crio: 
+{
+    Vue.prototype.$http.interceptors.requst.use(res => {
+        const array = []
+        for (let chave in res.data){
+            array.push({
+                id: chave, ...res.data[chave]
+            })
+        }
+        //substituo:
+        res.data = array
+
+        //retorno res p continuar fluxo normal
+        return res
+        
+    }, error => Promise.reject(error))
+}
+
+    - o res.data é um objeto que tem todos os registros obtidos, e dentro dele tem um dos registros que tem a chave que estou pegando ali, a chave me retorna:
+        {nome, email}
+    
+    - usando o operados spreed(...) ele coloca dentro do objeto
+
+Ai agora lá no meu templete, posso trocar o id, por usuario.id
+{<strong>ID: </strong>{{ usuario.id }}}
+
+Mas assim não vai me retornar Id nenhum, ficando os campos em branco, então eu comento ou excluui a parte:
+{ 
+    for (let chave in res.data){
+    array.push({
+        id: chave, ...res.data[chave]
+    })
+    }
+    //substituo:
+    res.data = array
+}
+
+E troco novamente a tag {<strong>ID: </strong>{{ id }}}
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+Posso criar um header global no arq 'axios.js'
+{
+axios.defaults.headers.common['Authorization'] = 'helen123'
+
+axios.defaults.headers.get['Accepts'] = 'application/json'
+}
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+                            IMPLEMENTANDO CRUD
+
+Ver o restante no prórpio cód 'App.vue', está com a explicação
