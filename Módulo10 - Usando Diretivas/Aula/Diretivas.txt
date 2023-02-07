@@ -1,0 +1,19 @@
+Pra criar uma diretiva personalizada uso Vue.directive(passando o nome da diretiva e um pbjeto associado):
+
+No objeto usamos o método de ciclo de vida da diretiva, que tem várias fases podendo escolher 1 ou + pra implementar na minha diretiva === {MÉTODOS HOOKS} -> são 5 métodos:
+
+	/*
+	{bind} -> Recebe 3 param: elemento, binding, vnode.
+		- elemento: único que posso mudar, elemento ao qual minha diretiva está ligada. Ou seja, all que vou receber baseado no diretiva, tipo, qual valor eu passei, qual modificardor, tipo...
+		
+		- o restante deve ser somente de leitura
+	
+	{inserted} -> Elemento inserido no nó pai
+	
+	{update} -> Quando o componente é atualizado (antes filhos)
+        - el, binding, vnode, oldVNode
+	
+	{componentUpdated} -> Quando componente é atualizado (depois filhos)
+        - el, binding, vnode, oldVNode
+	
+	{unbind} -> Quando diretiva é desvinculado do elemento
