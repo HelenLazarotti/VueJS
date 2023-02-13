@@ -1,0 +1,63 @@
+Criei banco de dados: helenstore
+
+Criei tabela p produtos:
+	CREATE TABLE helenstore.produtos (
+	id int(11) unsigned NOT NULL AUTO_INCREMENT,
+	nomeProduto VARCHAR(255) DEFAULT NULL,
+	PRIMARY KEY (id)
+	)
+
+Criei tabela p fornecedores:
+	CREATE TABLE helenstore.fornecedores (
+	id int(11) unsigned NOT NULL AUTO_INCREMENT,
+	empresa VARCHAR(255) DEFAULT NULL,
+	PRIMARY KEY (id)
+	)
+
+Criei tabela pro cliente: 
+	CREATE TABLE helenstore.clientes (
+	id int(11) unsigned NOT NULL AUTO_INCREMENT,
+	nomeCliente VARCHAR(255) DEFAULT NULL,
+	PRIMARY KEY (id)
+	)
+
+Inserindo dados nas tabelas:
+
+INSERT INTO helenstore.clientes (
+id, nomeCliente) VALUES (1, Helen), (2, Dora), 
+(3, Jesse), (4, Maya);
+
+INSERT INTO helenstore.fornecedores (
+id, empresa) VALUES (1, MagazineLuiza), 
+(2, Amazon), 
+(3, Netflix), (4, Twitter);
+
+INSERT INTO helenstore.produtos (
+id, nomeProduto) VALUES (1, TV), 
+(2, Notebook), 
+(3, Ações), (4, Bicicleta);
+
+MAS AINDA NAO INSERI, só p guardar o schema.
+
+
+Crio uma pasta e no terminal:
+ npm init -y 
+ - npm install restify
+
+No arq package.json -> scripts, e acrescentei:
+"dev": "node src/index.js",
+
+Rodar o terminal por:
+    - npm run dev
+
+Instalo o nodemon. E onde eu coloquei:
+"dev": "node src/index.js"
+
+Troco por "dev": "nodemon src/index.js"
+
+Instalei via prompt na pasta do projeto o:
+
+  - npm install restify-cors-middleware  --save-dev
+
+Auxiliar que me ajuda a me conectar com banco e a executar querys, vou na pasta do projeto -> prompt e coloco o comando:
+   - npm install mysql --save-dev 

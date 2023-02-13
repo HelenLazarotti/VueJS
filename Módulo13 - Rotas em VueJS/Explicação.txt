@@ -1,0 +1,61 @@
+Rotas são necessárias para navegação entre páginas, então pra instalar o Vue-Router, eu coloco:
+    - npm i --save vue-router@3.0.2 -E
+
+Instalei uma versão específica, o -E é dizendo, instala EXATAMENTE essa versão.
+
+Iniciei servidor e no projeto:
+    - criei uma pasta 'components' e o arq 'Inicio.vue'
+    - dentro uma pasta 'usuario' e arq 'Usuario.vue'
+    - na pasta 'src criei arq 'routes.js'
+
+No meu 'routes.js', é onde vai ficar todas as configurações das minhas rotas.
+
+E importei all que preciso:
+{
+    import Vue from "vue";
+    import  Router  from "vue-router";
+    import Inicio from './components/Inicio.vue';
+    import Usuario from './components/usuario/Usuario.vue'
+}
+
+E chamei o {Vue.use(Router)}, pq dai posso dentro dos meus compontes, acessar o Router a partir de 'this.$router'
+
+Abaixo crio uma funçao e exporto ela:
+{export default new Router ({
+    routes: [{
+        path: '/',
+        component: Inicio 
+        },
+        {
+            path: '/usuario',
+            component: Usuario
+        }
+    ]   
+})}
+    - path -> é sempre a rota
+    - component -> sempre o componente que referencia essa rota
+
+No arq 'main.js' importo minhas rotas:
+    - import router from './router'
+E no new Vue({
+    - adiciono { 
+        router,
+        render: h => h(App),
+
+Nós temos 2 módos de navegação: 
+
+1°Hash: só o navegador conhece, meu browser
+    - localhost:8080/#/....
+
+2°History: aqui posso navegar de rota em rota sem preocupação
+    - localhost:8080/...
+
+Na pasta 'components' criei uma pasta 'templete' -> arq. Menu.vue, nele, criei meu menu de naveagaçao:
+<template>
+<nav class="menu">
+    <router-link to="/">Início</router-link>
+    <router-link to="/usuario">Usuário</router-link>
+</nav>
+</template>
+
+E chamei/importei no arq 'App.vue'
